@@ -1,169 +1,171 @@
-# TravelTrucks — Онлайн-платформа оренди кемперів та вантажівок
+# TravelTrucks — Online Camper and Truck Rental Platform
 
-TravelTrucks — це сучасний вебзастосунок для компанії TravelTrucks, яка займається прокатом вантажних автомобілів та комфортабельних кемперів для подорожей.
+TravelTrucks is a modern web application for the TravelTrucks company, which specializes in renting trucks and comfortable campervans for traveling.
 
-## Короткий опис
+## Brief Description
 
-Застосунок дозволяє користувачам переглядати каталог доступних для оренди кемперів, фільтрувати їх за різними технічними критеріями, переглядати детальну інформацію про кожен транспортний засіб з відгуками та галереєю, а також бронювати авто на потрібні дати.
+The application allows users to browse the catalog of available campers for rent, filter them by various technical criteria, view detailed information about each vehicle including reviews and a photo gallery, and book a camper for their desired dates.
 
-## 🌟 Основні функції застосунку
+## 🌟 Main Features of the Application
 
-### 1. Домашня сторінка (`/`)
+### 1. Home Page (`/`)
 
-- **Головний банер**: Привабливий інтерфейс із чітким закликом до дії (Call to Action).
-- **Навігація**: Швидкий перехід до каталогу за допомогою кнопки "View Now".
+- **Hero Banner**: Attractive interface with a clear Call to Action (CTA).
+- **Navigation**: Quick transition to the catalog via the "View Now" button.
 
-### 2. Сторінка каталогу (`/catalog`)
+### 2. Catalog Page (`/catalog`)
 
-МАРШРУТ АПІ (`/campers`)
-МАРШРУТ АПІ (`/campers/filters`)
+API ROUTE (`/campers`)
+API ROUTE (`/campers/filters`)
 
-- **Серверна фільтрація**: Повноцінна фільтрація автомобілів на бекенді через API query-параметри (локація, тип кузова, тип двигуна, тип трансмісії),
-    маршрут (/campers/filters ).
-- **Динамічна пагінація**: Реалізовано нескінченне завантаження (Load More) по 4 картки за раз за допомогою технології TanStack Query (`useInfiniteQuery`).
-- **Ізоляція вікон**: Кнопка "Show more" на картці автомобіля відкриває детальну сторінку кемпера в окремій вкладці браузера (`target="_blank"`), зберігаючи стан фільтрів у поточному вікні.
-- **Менеджер станів каталогу**: При отриманні порожнього результату від сервера компонент відображає фірмову заглушку "No campers found" та забезпечує динамічне скидання параметрів і перезапуск запиту за допомогою інтерактивних кнопок "Clear filters" та "View all campers".
+- **Server-Side Filtering**: Full backend vehicle filtering via API query parameters (location, body form, engine type, transmission type),
+  route (`/campers/filters`).
+- **Dynamic Pagination**: Infinite loading (Load More) of 4 cards at a time implemented using TanStack Query (`useInfiniteQuery`).
+- **Window Isolation**: The "Show more" button on a vehicle card opens the detailed camper page in a separate browser tab (`target="_blank"`), preserving the filter state in the current window.
+- **Catalog State Manager**: When receiving an empty result from the server, the component displays a branded "No campers found" placeholder and provides dynamic parameter resetting and query re-fetching via interactive "Clear filters" and "View all campers" buttons.
 
-### 3. Сторінка деталей кемпера (`/catalog/[camperId]`)
+### 3. Camper Details Page (`/catalog/[camperId]`)
 
-МАРШРУТ АПІ (`/campers/{camperId}`)
+API ROUTE (`/campers/{camperId}`)
 
-- **Інформаційний блок**: Повна технічна специфікація транспортного засобу (габарити, об'єм бака, витрата палива).
-- **Інтерактивна галерея**: Циклічний слайдер зображень (Thumbs Gallery Loop) на базі бібліотеки Swiper.
-- **Відгуки користувачів**: Відображення реальних текстових відгуків клієнтів із візуальною п'ятизірковою шкалою рейтингу.
-- **Форма бронювання**: Вбудована інтерактивна форма з живою валідацією обов'язкових полів (Name, Email) та відправкою POST-запиту на сервер із миттєвим сповіщенням про успіх.
+- **Information Block**: Complete technical specifications of the vehicle (dimensions, tank volume, fuel consumption).
+- **Interactive Gallery**: Cyclic image slider (Thumbs Gallery Loop) based on the Swiper library.
+- **User Reviews**: Display of real customer text reviews with a visual five-star rating scale.
+- **Booking Form**: Built-in interactive form with live validation of required fields (Name, Email) and sending a POST request to the server with an instant success notification.
 
-### 4. Глобальна обробка помилок навігації
+### 4. Global Navigation Error Handling
 
-- **Сторінка Not Found**: Інтегровано системний обробник `not-found.tsx` для автоматичного перехоплення помилкових або неіснуючих URL-маршрутів усередині архітектури Next.js App Router.
+- **Not Found Page**: Integrated the system `not-found.tsx` handler to automatically intercept invalid or non-existent URL routes within the Next.js App Router architecture.
 
-## 🛠️ Технологічний стек
+## 🛠️ Tech Stack
 
-- **Фреймворк**: Next.js 15+ (App Router)
-- **Мова програмування**: TypeScript (+ Swagger)
-- **Управління станом та сервером**: TanStack Query v5 (`useInfiniteQuery`)
-- **Стилізація**: Чисті CSS Modules (`*.module.css`) на базі оригінальних констант та палітри кольорів із Figma
-- **Слайдер**: Swiper.js (Компоненти React)
-- **Іконки**: React Icons
-- **Базовий URL API**: https://campers-api.goit.study
+- **Framework**: Next.js 15+ (App Router)
+- **Programming Language**: TypeScript (+ Swagger)
+- **State and Server Management**: TanStack Query v5 (`useInfiniteQuery`)
+- **Styling**: Pure CSS Modules (`*.module.css`) based on original constants and the Figma color palette
+- **Slider**: Swiper.js (React Components)
+- **Icons**: React Icons
+- **Base API URL**: https://goit.study
 
-## 📁 Структура проєкту
+## 📁 Project Structure
 
 ```
-
 travel-trucks/
-├── app/                              # Папка нативного Next.js App Router (Маршрутизація)
-│   ├── catalog/                      # Сторінки, пов'язані з автомобільним каталогом
-│   │   ├── [camperId]/               # Динамічний роут детальної сторінки трека по ідентифікатору (ID)
-│   │   │   └── page.tsx              # Серверний компонент завантаження детальних даних кемпера та відгуків
-│   │   └── page.tsx                  # Сторінка каталогу (Рендеринг списку авто, сайдбара та завантаження нових карток)
-│   ├── [[...slug]]/                  # Опціональний загальний роут для головної сторінки
-│   │   └── page.tsx                  # Головна сторінка сайту (Home Page) з банером та кнопкою заклику до дії
+├── app/                              # Native Next.js App Router directory (Routing)
+│   ├── [[...slug]]/                  # Optional catch-all route for the home page
+│   │   └── page.tsx                  # Website Home Page with banner and call-to-action button
+│   ├── catalog/                      # Pages related to the vehicle catalog
+│   │   ├── [camperId]/               # Dynamic route for the camper details page by ID
+│   │   │   └── page.tsx              # Server component for fetching camper details and reviews
+│   │   └── page.tsx                  # Catalog page (Renders vehicle list, sidebar, and loads more cards)
 │   ├── globals.css
-│   ├── layout.tsx                    # Кореневий загальний макет сайту (Шапка сайту, Провайдери, Тіло сторінки)
-│   ├── loading.tsx                   # Системний компонент анімації завантаження при переході між сторінками
+│   ├── layout.tsx                    # Root layout of the website (Header, Providers, Page body)
+│   ├── loading.tsx                   # System loading animation component for page transitions
 │   ├── not-found.module.css
-│   └── not-found.tsx                 # Кастомна сторінка помилки (Сторінку не знайдено)
-├── components/                       # Папка ізольованих UI-компонентів фронтенду
+│   └── not-found.tsx                 # Custom error page (Page Not Found)
+├── components/                       # Directory for isolated frontend UI components
 │   ├── CamperCard/
 │   │   ├── CamperCard.module.css
-│   │   └── CamperCard.tsx            # Компонент картки автомобіля у списку каталогу
+│   │   └── CamperCard.tsx            # Vehicle card component in the catalog list
 │   ├── CampersFiltersSidebar/
 │   │   ├── CampersFiltersSidebar.module.css
-│   │   └── CampersFiltersSidebar.tsx # Сайдбар / Панель фільтрів: поле локації та класичні радіокнопки без іконок
+│   │   └── CampersFiltersSidebar.tsx # Sidebar / Filter panel: location input and classic radio buttons without icons
 │   ├── CampersNotFound/
 │   │   ├── CampersNotFound.module.css
-│   │   └── CampersNotFound.tsx       # Блок заглушки, якщо за фільтрами нічого не знайдено
+│   │   └── CampersNotFound.tsx       # Placeholder block displayed when no campers match the filters
 │   ├── CatalogLoader/
 │   │   ├── CatalogLoader.module.css
-│   │   └── CatalogLoader.tsx         # Перевикористовуваний компонент тексту завантаження, для головного лоадера
+│   │   └── CatalogLoader.tsx         # Reusable loading text component for the main loader
 │   ├── CatalogPageView/
 │   │   ├── CatalogPageView.module.css
-│   │   └── CatalogPageView.tsx       # Клієнтський контейнер, що об'єднує сайдбар фільтрів та нескінченний список карток
+│   │   └── CatalogPageView.tsx       # Client container combining the filters sidebar and infinite card list
 │   ├── HomePageView/
 │   │   ├── HomePageView.module.css
-│   │   └── HomePageView.tsx          # Контент головної сторінки: заголовки, описи та стартова кнопка переходу в каталог
+│   │   └── HomePageView.tsx          # Home page content: headings, descriptions, and start button to catalog
 │   ├── IdCamperBookingForm/
 │   │   ├── IdCamperBookingForm.module.css
-│   │   └── IdCamperBookingForm.tsx   # Форма бронювання та валідації з двома обов'язковими полями Ім'я та Електронна пошта
+│   │   └── IdCamperBookingForm.tsx   # Booking and validation form with two required fields: Name and Email
 │   ├── IdCamperPageView/
 │   │   ├── IdCamperPageView.module.css
-│   │   └── IdCamperPageView.tsx      # Головна сторінка кемпера по ID, об'єднує слайдер, опис, таблицю, форму (4 блоки)
+│   │   └── IdCamperPageView.tsx      # Main camper page by ID, combining slider, description, table, and form (4 blocks)
 │   ├── IdCamperReviews/
 │   │   ├── IdCamperReviews.module.css
-│   │   └── IdCamperReviews.tsx       # Безпечно перевіряє масив, малює першу літеру імені в колі та ряд зірок зі спрайту
+│   │   └── IdCamperReviews.tsx       # Safely validates the array, renders the user's initial in a circle, and displays the star rating
 │   ├── IdImageSlider/
 │   │   ├── IdImageSlider.module.css
-│   │   └── IdImageSlider.tsx         # Галерея зображень: великий слайдер та чотири мініатюри з червоним бігунком прокручування
+│   │   └── IdImageSlider.tsx         # Image gallery: main slider and four thumbnails with a red scrollbar
 │   ├── IdVehicleTable/
 │   │   ├── IdVehicleTable.module.css
-│   │   └── IdVehicleTable.tsx        # Таблиця обладнання та технічних характеристик, Виводить текстовий ряд
+│   │   └── IdVehicleTable.tsx        # Equipment and technical specifications table, outputs text rows
 │   ├── NavigationHeader/
 │   │   ├── NavigationHeader.module.css
-│   │   └── NavigationHeader.tsx      # Головне навігаційне меню сайту (Шапка сайту)
+│   │   └── NavigationHeader.tsx      # Main website navigation menu (Header)
 │   ├── Providers/
-│   │   └── TanStackProvider.tsx      # Конфігурація та активація клієнтського провайдера для запитів TanStack Query
+│   │   └── TanStackProvider.tsx      # Configuration and activation of the TanStack Query client provider
 │   └── StarRating/
 │       ├── StarRating.module.css
-│       └── StarRating.tsx            # Компонент автоматичного відображення дробового рейтингу
+│       └── StarRating.tsx            # Component for automatic fractional rating display
 ├── constants/
-│   └── environment.ts                # Зберігає константу базової адреси сервера для запитів до бекенду
+│   └── environment.ts                # Stores the base server URL constant for backend requests
 ├── public/
 │   ├── image/
-│   │   ├── Hero-2x.jpg               # Фонове зображення банера високої чіткості для екранів високої роздільної здатності
-│   │   ├── Hero.jpg                  # Стандартне фонове зображення головного банера сторінки
-│   │   └── no-campers-found.png      # Картинка для порожнього каталогу
-│   ├── caravan-camping.svg           # Декоративна іконка для інтерфейсу
-│   └── sprite.svg                    # Іконки, SVG спрайт проєкту
-├── types/                            # Папка суворої типізації TypeScript
-│   └── campers.ts                    # Інтерфейси моделей даних з сервера без використання примусового приведення типів
-└── utils/                            # Ізольовані допоміжні функції та запити до сервера
-    ├── camperDetailsApi.ts           # Серверні запити детальної сторінки за ID та запит форми бронювання
-    └── fetchCampersApi.ts            # Функції запитів списку каталогу з урахуванням параметрів фільтрації
+│   │   ├── Hero-2x.jpg               # High-resolution hero banner background image for Retina/HiDPI screens
+│   │   ├── Hero.jpg                  # Standard hero banner background image
+│   │   └── no-campers-found.png      # Image for the empty catalog state
+│   ├── caravan-camping.svg           # Decorative UI icon
+│   └── sprite.svg                    # Icons, project SVG sprite
+├── types/                            # Strict TypeScript typing directory
+│   └── campers.ts                    # Server data model interfaces without forced type casting
+└── utils/                            # Isolated helper functions and server API requests
+    ├── camperDetailsApi.ts           # Server requests for the details page by ID and booking form submission
+    └── fetchCampersApi.ts            # Catalog list fetch functions with filtering parameters
+
 ```
 
-## 🚀 Інструкція зі встановлення та запуску
+## 🚀 Installation and Setup Instructions
 
-### Попередні вимоги
+### Prerequisites
 
-Переконайтеся, що на вашому комп'ютері встановлено **Node.js** (рекомендовано версію 18.0.0 або новішу) та менеджер пакетів **npm**.
+Make sure you have **Node.js** (version 18.0.0 or higher is recommended) and the **npm** package manager installed on your computer.
 
-### 1. Клонування репозиторію:
+### 1. Clone the repository:
 
 ```bash
 git clone https://github.com/KiraSpace777/travel-trucks.git
 cd travel-trucks
 ```
 
-### 2. Встановлення залежностей:
+### 2. Install dependencies:
 
 ```bash
 npm install
 ```
 
-### 3. Налаштування середовища (Environment Variables)
+### 3. Environment Variables Setup
 
-Створіть файл `.env` у кореневій папці проєкту та додайте базову адресу API:
+Create a `.env` file in the root directory of the project and add the base API URL:
 
 ```env
 NEXT_PUBLIC_API_URL=https://campers-api.goit.study
 ```
 
-### 4. Запуск у режимі розробки:
+### 4. Run in development mode:
 
 ```bash
 npm run dev
 ```
 
-Після цього відкрийте [http://localhost:3000](http://localhost:3000) у вашому браузері, щоб переглянути застосунок.
+After that, open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-## Інформація про автора
+## Author Information
 
-- **Розробник**: [Anna Krochak / KiraSpace777]
-- **Роль у проєкті**: FULLSTACK Developer
-- **РЕПОЗИТОРІЙ**: https://github.com/KiraSpace777/travel-trucks
-- **Головна сторінка додатку**: https://travel-trucks-one-blond.vercel.app/
-- **Документація бекенду (API)**: [https://campers-api.goit.study/docs](https://campers-api.goit.study/docs)
+- **Developer**: [Anna Krochak / KiraSpace777]
+- **Role in Project**: FULLSTACK Developer
+- **REPOSITORY**: https://github.com/KiraSpace777/travel-trucks
+- **Live Application**: https://travel-trucks-one-blond.vercel.app/
+- **Backend Documentation (API)**: [https://campers-api.goit.study/docs](https://campers-api.goit.study/docs)
+
+# --- Additional information ----
 
 # Next.js - React Framework for the Web (general information)
 

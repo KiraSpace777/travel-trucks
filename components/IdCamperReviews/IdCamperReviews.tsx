@@ -30,12 +30,7 @@ export const IdCamperReviews = ({ reviewsListArray }: IdCamperReviewsProperties)
                   {individualReviewItem.reviewer_name}
                 </h4>
                 <div className={styles.starsRatingRow}>
-                  <StarRating
-                    value={individualReviewItem.reviewer_rating}
-                    readOnly
-                    showValue={false}
-                    size="sm"
-                  />
+                  <StarRating value={individualReviewItem.reviewer_rating} />
                 </div>
               </div>
             </div>

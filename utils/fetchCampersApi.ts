@@ -31,7 +31,6 @@ export const fetchCampersFromExternalService = async ({
   }
 
   const targetRequestUrlString = `${CAMPERS_API_BASE_URL}/campers?${urlSearchParamsInstance.toString()}`;
-
   const serviceFetchResponseInstance = await fetch(targetRequestUrlString);
 
   if (!serviceFetchResponseInstance.ok) {
@@ -44,4 +43,42 @@ export const fetchCampersFromExternalService = async ({
     await serviceFetchResponseInstance.json();
 
   return targetFormattedDataResponse;
+};
+
+export const fetchAvailableLocationsFromBackend = async (): Promise<string[]> => {
+  const uniqueLocationsSet = new Set<string>();
+  let currentPage = 1;
+  let totalPages = 1;
+
+  while (currentPage <= totalPages) {
+    const urlSearchParamsInstance = new URLSearchParams({
+      page: currentPage.toString(),
+      perPage: CAMPERS_PER_PAGE_LIMIT.toString(),
+    });
+
+    const targetRequestUrlString = `${CAMPERS_API_BASE_URL}/campers?${urlSearchParamsInstance.toString()}`;
+    const serviceFetchResponseInstance = await fetch(targetRequestUrlString);
+
+    if (!serviceFetchResponseInstance.ok) {
+      break;
+    }
+
+    const targetFormattedDataResponse: CamperListResponseDto =
+      await serviceFetchResponseInstance.json();
+
+    totalPages = targetFormattedDataResponse.totalPages || 1;
+
+    targetFormattedDataResponse.campers.forEach((camperItem) => {
+      const trimmedLocation = camperItem.location.trim();
+      if (trimmedLocation !== "") {
+        uniqueLocationsSet.add(trimmedLocation);
+      }
+    });
+
+    currentPage += 1;
+  }
+
+  return Array.from(uniqueLocationsSet).sort((firstLocation, secondLocation) =>
+    firstLocation.localeCompare(secondLocation),
+  );
 };

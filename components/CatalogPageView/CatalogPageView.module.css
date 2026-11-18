@@ -2,11 +2,9 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: -1px;
   position: relative;
   z-index: 10;
   background-color: var(--white);
-
   max-width: 1440px;
   margin: 0 auto;
 }
@@ -38,6 +36,10 @@
   margin-bottom: 40px;
 }
 
+.camperListItem {
+  width: 100%;
+}
+
 .loadMoreButton {
   min-width: 145px;
   height: 56px;
@@ -50,30 +52,30 @@
   border-color: var(--color-primary-dark);
 }
 
-.loadingSpinnerContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 0;
-  width: 100%;
-}
-
-.spinnerElement {
-  width: 48px;
-  height: 48px;
-  border: 5px solid var(--color-background-gray);
-  border-top-color: var(--color-primary-dark);
+.scrollToTopButton {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  width: 52px;
+  height: 52px;
+  padding: 0;
   border-radius: 50%;
-  animation: rotationAnimationSpeed 1s linear infinite;
-  margin-bottom: 24px;
+  background-color: var(--color-primary-light);
+  color: var(--white);
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.16);
+  z-index: 40;
+  transition:
+    background-color 0.2s ease-in-out,
+    transform 0.2s ease-in-out;
 }
 
-@keyframes rotationAnimationSpeed {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+.scrollToTopButton:hover,
+.scrollToTopButton:focus {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.scrollToTopIcon {
+  width: 18px;
+  height: 18px;
 }

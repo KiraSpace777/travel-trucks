@@ -4,49 +4,44 @@ import { Rating, Star } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import styles from "./StarRating.module.css";
 
-const STAR_COUNT = 5;
-
-const getStarStyles = (strokeWidth: number) => ({
+const STAR_SHAPE_CONFIG = {
   itemShapes: Star,
-  itemStrokeWidth: strokeWidth,
-  activeFillColor: "#FFC531",
-  activeStrokeColor: "#FFC531",
-  inactiveFillColor: "transparent",
-  inactiveStrokeColor: " #DADDE1",
-});
+  itemStrokeWidth: 1,
+};
 
 interface StarRatingProps {
   value: number;
+  count?: 1 | 5;
   readOnly?: boolean;
   showValue?: boolean;
-  size?: "sm" | "md" | "lg";
-  strokeWidth?: number;
   className?: string;
 }
 
 export default function StarRating({
   value,
-  readOnly = false,
+  count = 5,
+  readOnly = true,
   showValue = false,
-  size = "md",
-  strokeWidth = 1,
   className = "",
 }: StarRatingProps) {
+  const numericValue = Number(value) || 0;
+  const clampedValue = Math.max(0, Math.min(5, numericValue));
+  const roundedValue = Math.round(clampedValue * 2) / 2;
+  const passedToRating = count === 1 ? 1 : roundedValue;
+
   return (
-    <div className={`${styles.row} ${className}`}>
-      <div className={styles[size]}>
-        <Rating
-          className={styles.rating}
-          value={value}
-          readOnly={readOnly}
-          items={STAR_COUNT}
-          itemStyles={getStarStyles(strokeWidth)}
-          halfFillMode="svg"
-          spaceInside="none"
-          transition="colors"
-        />
-      </div>
-      {showValue && readOnly && <span className={styles.score}>{value.toFixed(1)}</span>}
+    <div className={`${styles.row} ${className}`.trim()}>
+      <Rating
+        className={styles.rating}
+        value={passedToRating}
+        readOnly={readOnly}
+        items={count}
+        itemStyles={STAR_SHAPE_CONFIG}
+        halfFillMode="svg"
+        spaceInside="none"
+        transition="colors"
+      />
+      {showValue && readOnly && <span className={styles.score}>{numericValue}</span>}
     </div>
   );
 }

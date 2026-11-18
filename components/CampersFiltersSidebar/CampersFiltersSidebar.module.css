@@ -6,10 +6,17 @@
   padding: 24px;
   border-radius: 20px;
   background-color: var(--inputs);
-  box-sizing: border-box;
+}
+
+.filtersForm {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .locationBlock {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -55,6 +62,52 @@
   border-color: var(--gray);
 }
 
+.locationHintText {
+  font-size: 12px;
+  line-height: 140%;
+  color: var(--color-text-secondary);
+}
+
+.locationHintWarning {
+  color: var(--color-error);
+}
+
+.locationsDropdownList {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: var(--white);
+  border: 1px solid var(--color-border-default);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+  z-index: 30;
+  padding: 6px;
+}
+
+.locationDropdownItem {
+  width: 100%;
+}
+
+.locationDropdownButton {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 14px;
+  line-height: 140%;
+  color: var(--color-text-main);
+  transition: background-color 0.15s ease-in-out;
+}
+
+.locationDropdownButton:hover,
+.locationDropdownButton:focus {
+  background-color: var(--inputs);
+}
+
 .filtersTitle {
   font-size: 20px;
   line-height: 120%;
@@ -92,15 +145,14 @@
 
 .nativeRadioInput {
   appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--color-border-default);
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--color-border-default);
   border-radius: 50%;
   outline: none;
   background-color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-shrink: 0;
   cursor: pointer;
   transition: border-color 0.2s ease-in-out;
 }
@@ -111,20 +163,17 @@
 
 .nativeRadioInput:checked {
   border-color: var(--color-primary-dark);
-}
-
-.nativeRadioInput:checked::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  background-color: var(--color-primary-dark);
-  border-radius: 50%;
-  display: block;
+  background-image: radial-gradient(
+    circle,
+    var(--color-primary-dark) 0%,
+    var(--color-primary-dark) 44%,
+    transparent 48%
+  );
 }
 
 .optionTextLabel {
   font-size: 16px;
-  /* line-height: 150%; */
+  line-height: 150%;
   color: var(--color-text-main);
 }
 
@@ -163,14 +212,14 @@
   border-color: var(--color-primary-dark);
 }
 
-.clearButtonContent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.clearIcon {
+.clearFiltersIconCross {
   width: 12px;
   height: 12px;
   flex-shrink: 0;
+}
+
+.clearFiltersButtonText {
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-text-main);
 }

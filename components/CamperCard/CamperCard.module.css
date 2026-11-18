@@ -5,7 +5,6 @@
   background-color: var(--color-background-white);
   border: none;
   border-radius: 20px;
-  box-sizing: border-box;
 }
 
 .camperCardImage {
@@ -55,15 +54,13 @@
   line-height: 150%;
 }
 
-.starIcon {
-  width: 16px;
-  height: 16px;
-  fill: var(--color-accent-star);
-}
-
 .metaIcon {
   width: 16px;
   height: 16px;
+}
+
+.metaText {
+  margin: 0;
 }
 
 .cardDescriptionText {

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CamperListItemDto } from "@/types/campers";
+import StarRating from "@/components/StarRating/StarRating";
 import styles from "./CamperCard.module.css";
 
 interface CamperCardProperties {
@@ -16,11 +17,11 @@ export const CamperCard = ({ camperData, isFirstCardElementInList }: CamperCardP
   };
 
   const formatPriceWithThousandsSeparatorHelper = (priceNumber: number) => {
-    return priceNumber.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return priceNumber.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   };
 
   return (
-    <div className={styles.camperCardContainer}>
+    <article className={styles.camperCardContainer}>
       <Image
         src={camperData.coverImage}
         alt={camperData.name}
@@ -38,49 +39,47 @@ export const CamperCard = ({ camperData, isFirstCardElementInList }: CamperCardP
           </span>
         </div>
 
-        <div className={styles.metaInfoRow}>
-          <div className={styles.metaItem}>
-            <svg className={styles.starIcon}>
-              <use href="/sprite.svg#icon-star" />
-            </svg>
-            <span className="interRegular">
+        <ul className={styles.metaInfoRow}>
+          <li className={styles.metaItem}>
+            <StarRating value={camperData.rating} count={1} />
+            <p className={`${styles.metaText} interRegular`}>
               {camperData.rating} ({camperData.totalReviews} Reviews)
-            </span>
-          </div>
-          <div className={styles.metaItem}>
+            </p>
+          </li>
+          <li className={styles.metaItem}>
             <svg className={styles.metaIcon}>
               <use href="/sprite.svg#icon-map" />
             </svg>
             <span className="interRegular">{camperData.location}</span>
-          </div>
-        </div>
+          </li>
+        </ul>
 
         <p className={`${styles.cardDescriptionText} interRegular`}>
           Embrace simplicity and freedom with the {camperData.name}...
         </p>
 
-        <div className={styles.badgesBlock}>
-          <div className={styles.featureBadgeItem}>
+        <ul className={styles.badgesBlock}>
+          <li className={styles.featureBadgeItem}>
             <svg className={styles.badgeIcon}>
               <use href="/sprite.svg#gas-station" />
             </svg>
             <span className="interMedium">{capitalizeFirstLetterHelper(camperData.engine)}</span>
-          </div>
-          <div className={styles.featureBadgeItem}>
+          </li>
+          <li className={styles.featureBadgeItem}>
             <svg className={styles.badgeIcon}>
               <use href="/sprite.svg#transmission" />
             </svg>
             <span className="interMedium">
               {capitalizeFirstLetterHelper(camperData.transmission)}
             </span>
-          </div>
-          <div className={styles.featureBadgeItem}>
+          </li>
+          <li className={styles.featureBadgeItem}>
             <svg className={styles.badgeIcon}>
               <use href="/sprite.svg#truck-car" />
             </svg>
             <span className="interMedium">{capitalizeFirstLetterHelper(camperData.form)}</span>
-          </div>
-        </div>
+          </li>
+        </ul>
 
         <Link
           href={`/catalog/${camperData.id}`}
@@ -90,6 +89,6 @@ export const CamperCard = ({ camperData, isFirstCardElementInList }: CamperCardP
           Show more
         </Link>
       </div>
-    </div>
+    </article>
   );
 };

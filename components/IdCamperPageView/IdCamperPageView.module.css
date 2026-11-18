@@ -39,8 +39,6 @@
   background: var(--inputs);
 }
 
-/* .camperInfoMetrics{} */
-
 .secondContentBlock {
   gap: 24px;
   display: block;
@@ -50,15 +48,6 @@
   display: flex;
   flex-direction: row;
   gap: 48px;
-}
-
-/* .camperReviewsSection {} */
-/* .camperBookingSection {} */
-
-.mainHeaderInfo {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 28px;
 }
 
 .camperName {
@@ -83,10 +72,8 @@
   line-height: 150%;
 }
 
-.starIcon {
-  width: 16px;
-  height: 16px;
-  fill: #ffc531;
+.metaText {
+  margin: 0;
 }
 
 .mapIcon {
@@ -132,7 +119,7 @@
 
 .toastCentralCardBox {
   position: relative;
-  background-color: #ffffff;
+  background-color: var(--white);
   padding: 40px;
   border-radius: 20px;
   width: 100%;
@@ -141,7 +128,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  box-shadow: 0px 4px 24px rgba(16, 24, 40, 0.08);
+  box-shadow: 0 4px 24px rgba(16, 24, 40, 0.08);
   animation: scaleUpEffect 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -162,7 +149,7 @@
 .toastCloseIconSvg {
   width: 16px;
   height: 16px;
-  fill: #101828;
+  fill: var(--main);
   transition: transform 0.2s ease;
 }
 
@@ -173,7 +160,7 @@
 .toastSuccessCheckCircle {
   width: 64px;
   height: 64px;
-  background-color: #f2f4f7;
+  background-color: var(--badges);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -181,24 +168,18 @@
   margin-bottom: 20px;
 }
 
-.toastSuccessCheckIcon {
-  width: 28px;
-  height: 28px;
-  fill: #ffc531;
-}
-
 .toastMainHeadlineText {
   margin: 0 0 8px 0;
   font-size: 22px;
   line-height: 120%;
-  color: #101828;
+  color: var(--main);
 }
 
 .toastBodyMessageText {
   margin: 0;
   font-size: 16px;
   line-height: 150%;
-  color: #475467;
+  color: var(--text);
 }
 
 @keyframes fadeInEffect {

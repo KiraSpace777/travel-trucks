@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { CamperDetailsEntity, BookingRequestDto } from "@/types/campers";
 import { submitCamperBookingRequestToBackend } from "@/utils/camperDetailsApi";
@@ -8,6 +8,7 @@ import { IdImageSlider } from "@/components/IdImageSlider/IdImageSlider";
 import { IdVehicleTable } from "@/components/IdVehicleTable/IdVehicleTable";
 import { IdCamperReviews } from "@/components/IdCamperReviews/IdCamperReviews";
 import { IdCamperBookingForm } from "@/components/IdCamperBookingForm/IdCamperBookingForm";
+import StarRating from "@/components/StarRating/StarRating";
 import styles from "./IdCamperPageView.module.css";
 
 interface IdCamperPageViewProperties {
@@ -53,13 +54,12 @@ export const IdCamperPageView = ({ camperDetailsData }: IdCamperPageViewProperti
   };
 
   const formatPriceWithThousandsSeparatorHelper = (priceNumber: number) => {
-    return priceNumber.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return priceNumber.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   };
 
   const safeReviewsListArray = Array.isArray(camperDetailsData.reviews)
     ? camperDetailsData.reviews
     : [];
-
   return (
     <div className={styles.pageContainer}>
       {isToastVisibleBoolean && (
@@ -75,13 +75,7 @@ export const IdCamperPageView = ({ camperDetailsData }: IdCamperPageViewProperti
               </svg>
             </button>
             <div className={styles.toastSuccessCheckCircle}>
-              <svg
-                className={styles.starIcon}
-                viewBox="0 0 15 14"
-                style={{ width: "28px", height: "28px", fill: "#FFC531" }}
-              >
-                <use href="/sprite.svg#icon-star" />
-              </svg>
+              <StarRating value={1} count={1} />
             </div>
             <h4 className={`${styles.toastMainHeadlineText} interSemiBold`}>Success!</h4>
             <p className={`${styles.toastBodyMessageText} interRegular`}>
@@ -91,33 +85,27 @@ export const IdCamperPageView = ({ camperDetailsData }: IdCamperPageViewProperti
         </div>
       )}
 
-      <div className={styles.firstContentBlock}>
+      <section className={styles.firstContentBlock}>
         <div className={styles.camperGallerySection}>
           <IdImageSlider imagesArray={camperDetailsData.gallery} />
         </div>
         <div className={styles.camperInfoSection}>
           <div className={styles.camperInfoGeneral}>
             <h1 className={`${styles.camperName} interSemiBold`}>{camperDetailsData.name}</h1>
-            <div className={styles.metaRowRow}>
-              <div className={styles.metaItemBlock}>
-                <svg
-                  className={styles.starIcon}
-                  viewBox="0 0 15 14"
-                  style={{ width: "16px", height: "16px", fill: "#FFC531", marginRight: "4px" }}
-                >
-                  <use href="/sprite.svg#icon-star" />
-                </svg>
-                <span className="interRegular">
+            <ul className={styles.metaRowRow}>
+              <li className={styles.metaItemBlock}>
+                <StarRating value={camperDetailsData.rating} count={1} />
+                <p className={`${styles.metaText} interRegular`}>
                   {camperDetailsData.rating} ({camperDetailsData.totalReviews} Reviews)
-                </span>
-              </div>
-              <div className={styles.metaItemBlock}>
+                </p>
+              </li>
+              <li className={styles.metaItemBlock}>
                 <svg className={styles.mapIcon}>
                   <use href="/sprite.svg#icon-map" />
                 </svg>
                 <span className="interRegular">{camperDetailsData.location}</span>
-              </div>
-            </div>
+              </li>
+            </ul>
             <h2 className={`${styles.camperPriceText} interSemiBold`}>
               €{formatPriceWithThousandsSeparatorHelper(camperDetailsData.price)}
             </h2>
@@ -129,8 +117,9 @@ export const IdCamperPageView = ({ camperDetailsData }: IdCamperPageViewProperti
             <IdVehicleTable camperDetailsData={camperDetailsData} />
           </div>
         </div>
-      </div>
-      <div className={styles.secondContentBlock}>
+      </section>
+
+      <section className={styles.secondContentBlock}>
         <h3 className={`${styles.reviewsSectionTitle} interSemiBold`}>Reviews</h3>
         <div className={styles.secondBlockGroup}>
           <div className={styles.camperReviewsSection}>
@@ -140,7 +129,7 @@ export const IdCamperPageView = ({ camperDetailsData }: IdCamperPageViewProperti
             <IdCamperBookingForm onSubmitBookingDataAction={handleBookingFormSubmitAction} />
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
