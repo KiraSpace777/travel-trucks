@@ -9,8 +9,8 @@
   --star-size: 16px;
   --rr--fill-on-color: var(--color-accent-star);
   --rr--fill-off-color: var(--gray-light);
-  --rr--stroke-on-color: var(--color-accent-star);
-  --rr--stroke-off-color: var(--gray-light);
+  --rr--stroke-on-color: none;
+  --rr--stroke-off-color: none;
   display: inline-flex;
   align-items: center;
   width: auto;
@@ -38,6 +38,7 @@
   width: var(--star-size);
   height: var(--star-size);
   display: block;
+  margin-right: 4px;
 }
 
 .score {

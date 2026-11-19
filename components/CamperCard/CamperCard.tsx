@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { FiMapPin } from "react-icons/fi";
 import { CamperListItemDto } from "@/types/campers";
 import StarRating from "@/components/StarRating/StarRating";
 import styles from "./CamperCard.module.css";
@@ -47,9 +48,7 @@ export const CamperCard = ({ camperData, isFirstCardElementInList }: CamperCardP
             </p>
           </li>
           <li className={styles.metaItem}>
-            <svg className={styles.metaIcon}>
-              <use href="/sprite.svg#icon-map" />
-            </svg>
+            <FiMapPin className={styles.metaIcon} />
             <span className="interRegular">{camperData.location}</span>
           </li>
         </ul>

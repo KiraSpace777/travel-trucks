@@ -1,12 +1,29 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
+import { FiSun, FiMoon } from "react-icons/fi";
 import styles from "./NavigationHeader.module.css";
+
+const subscribeToClientMount = () => () => {};
 
 export const NavigationHeader = () => {
   const currentActivePathname = usePathname();
+  const { resolvedTheme, setTheme } = useTheme();
+  const isClientMounted = useSyncExternalStore(
+    subscribeToClientMount,
+    () => true,
+    () => false,
+  );
+
   const isCatalogPageActive = currentActivePathname === "/catalog";
+  const isDarkThemeActive = isClientMounted && resolvedTheme === "dark";
+
+  const handleToggleThemeClick = () => {
+    setTheme(isDarkThemeActive ? "light" : "dark");
+  };
 
   return (
     <header
@@ -38,7 +55,20 @@ export const NavigationHeader = () => {
             Catalog
           </Link>
         </nav>
-        <div className={styles.emptySpacerNode} />
+        <div className={styles.themeControlsWrapper}>
+          <button
+            type="button"
+            onClick={handleToggleThemeClick}
+            className={styles.themeToggleButton}
+            aria-label="Toggle color theme"
+          >
+            {isDarkThemeActive ? (
+              <FiSun className={styles.themeToggleIcon} />
+            ) : (
+              <FiMoon className={styles.themeToggleIcon} />
+            )}
+          </button>
+        </div>
       </div>
     </header>
   );

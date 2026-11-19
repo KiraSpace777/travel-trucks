@@ -33,6 +33,11 @@
 .brandLogoIcon {
   width: 136px;
   height: 16px;
+  color: var(--grey-green);
+}
+
+:global(html[data-theme="dark"]) .brandLogoIcon {
+  color: #4a5953;
 }
 
 .navigationLinksList {
@@ -44,22 +49,78 @@
 }
 
 .navigationLinkItem {
+  position: relative;
   font-family: var(--font-family);
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
   color: var(--grey-green);
-  padding: 4px 0;
-  transition: color 0.2s ease-in-out;
+  padding: 6px 0;
+  transition: color 0.25s ease-in-out;
+}
+
+:global(html[data-theme="dark"]) .navigationLinkItem {
+  color: #6d7b75;
+}
+
+.navigationLinkItem::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  border-radius: 100px;
+  background-color: var(--color-primary-light);
+  transform: scaleX(0);
+  transform-origin: center;
+  opacity: 0;
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.25s ease-in-out;
 }
 
 .navigationLinkItem:hover,
 .navigationLinkItem:focus,
-.activeNavigationLinkItem {
+.activeNavigationLinkItem,
+:global(html[data-theme="dark"]) .navigationLinkItem:hover,
+:global(html[data-theme="dark"]) .navigationLinkItem:focus,
+:global(html[data-theme="dark"]) .activeNavigationLinkItem {
   color: var(--main);
   outline: none;
 }
 
-.emptySpacerNode {
+.activeNavigationLinkItem::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+.themeControlsWrapper {
   flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.themeToggleButton {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-default);
+  background-color: var(--white);
+  color: var(--color-text-main);
+  transition:
+    border-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+}
+
+.themeToggleButton:hover,
+.themeToggleButton:focus {
+  border-color: var(--color-primary-dark);
+}
+
+.themeToggleIcon {
+  width: 18px;
+  height: 18px;
 }

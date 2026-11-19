@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, type SubmitEvent } from "react";
+import { FiMapPin } from "react-icons/fi";
 import {
   CatalogFiltersState,
   CamperBodyFormType,
@@ -206,9 +207,7 @@ export const CampersFiltersSidebar = ({
             Location
           </label>
           <div className={styles.inputWrapper}>
-            <svg className={styles.locationIcon}>
-              <use href="/sprite.svg#icon-map" />
-            </svg>
+            <FiMapPin className={styles.locationIcon} />
             <input
               id="locationInputId"
               type="text"

@@ -11,7 +11,7 @@
   background-position: center;
   background-size: cover;
   box-sizing: border-box;
-  color: var(--inputs);
+  color: var(--pure-white);
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -32,7 +32,7 @@
   box-sizing: border-box;
 
   font-weight: 600;
-  color: var(--inputs);
+  color: var(--pure-white);
 }
 
 .homePageTitle {
@@ -64,7 +64,7 @@
   font-size: 16px;
   line-height: 150%;
   letter-spacing: -0.01em;
-  color: var(--white);
+  color: var(--pure-white);
 
   background-color: var(--color-primary-light);
 

@@ -3,6 +3,7 @@ import { Inter, Manrope } from "next/font/google";
 import "modern-normalize/modern-normalize.css";
 import "./globals.css";
 import { TanStackProvider } from "../components/Providers/TanStackProvider";
+import { ThemeProvider } from "../components/Providers/ThemeProvider";
 import { NavigationHeader } from "../components/NavigationHeader/NavigationHeader";
 
 const interFontConfiguration = Inter({
@@ -52,12 +53,14 @@ interface RootLayoutProperties {
 
 const RootLayout = ({ children }: RootLayoutProperties) => {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className={`${interFontConfiguration.variable} ${manropeFontConfiguration.variable}`}>
-        <TanStackProvider>
-          <NavigationHeader />
-          <main>{children}</main>
-        </TanStackProvider>
+        <ThemeProvider>
+          <TanStackProvider>
+            <NavigationHeader />
+            <main>{children}</main>
+          </TanStackProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

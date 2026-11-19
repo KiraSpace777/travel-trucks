@@ -41,9 +41,18 @@
   margin-bottom: 16px;
 }
 
+:global(html[data-theme="dark"]) .badgeItemUnit {
+  mix-blend-mode: normal;
+  color: var(--color-text-main);
+}
+
 .badgeIconSvg {
   width: 20px;
   height: 20px;
+}
+
+:global(html[data-theme="dark"]) .badgeIconSvg {
+  filter: brightness(0) invert(0.92);
 }
 
 .tableHeadingText {

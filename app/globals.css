@@ -23,8 +23,32 @@
   --color-border-default: var(--gray-light);
   --color-error: var(--button);
 
-  /* змінна для динамічного керування рамкою хедера */
   --header-border-color: var(--color-border-default);
+
+  --pure-white: #ffffff;
+  --brand-accent: var(--grey-green);
+}
+
+[data-theme="dark"] {
+  --main: #f2f4f7;
+  --text: #cbd5e1;
+  --white: #101828;
+  --inputs: #1d2939;
+  --badges: #29384d;
+  --gray: #98a2b3;
+  --gray-light: #344054;
+  --grey-green: #8fa99e;
+  --olive: #1d2939;
+  --green-hover: #7a9489;
+
+  --color-primary-dark: var(--green-hover);
+  --color-primary-light: var(--grey-green);
+  --color-background-gray: var(--badges);
+  --color-background-white: var(--inputs);
+  --color-text-secondary: var(--text);
+  --color-text-main: var(--main);
+  --color-border-default: var(--gray-light);
+  --brand-accent: #52615b;
 }
 
 * {

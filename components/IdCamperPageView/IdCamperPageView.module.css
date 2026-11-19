@@ -79,7 +79,9 @@
 .mapIcon {
   width: 16px;
   height: 16px;
-  fill: var(--color-text-main);
+  flex-shrink: 0;
+  overflow: visible;
+  color: var(--color-text-secondary);
 }
 
 .camperPriceText {

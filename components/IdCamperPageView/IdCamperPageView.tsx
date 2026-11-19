@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { FiMapPin } from "react-icons/fi";
 import { CamperDetailsEntity, BookingRequestDto } from "@/types/campers";
 import { submitCamperBookingRequestToBackend } from "@/utils/camperDetailsApi";
 import { IdImageSlider } from "@/components/IdImageSlider/IdImageSlider";
@@ -100,9 +101,7 @@ export const IdCamperPageView = ({ camperDetailsData }: IdCamperPageViewProperti
                 </p>
               </li>
               <li className={styles.metaItemBlock}>
-                <svg className={styles.mapIcon}>
-                  <use href="/sprite.svg#icon-map" />
-                </svg>
+                <FiMapPin className={styles.mapIcon} />
                 <span className="interRegular">{camperDetailsData.location}</span>
               </li>
             </ul>
